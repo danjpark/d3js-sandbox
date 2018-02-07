@@ -43,3 +43,20 @@ let svg2 = d3.select("body")
                fill: function(d) {return colorPicker(d)}
              });
             // still dont fully get y and height and how they relate
+
+svg.selectAll("text")
+  .data(dataset)
+  .enter()
+  .append("text")
+  .text(function(d) {return d; })
+  .attr({
+    "text-anchor": "middle",
+    x: function(d,i){
+        return i * (w / dataset.length) + (w / dataset.length - padding) / 2;
+      },
+    y: function(d){
+      return h - (d*4) + 25;
+    },
+    "font-family": "sans-serif",
+    "fill": "#ffffff"
+  });
