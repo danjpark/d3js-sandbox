@@ -37,34 +37,38 @@ let viz = svg.append("path")
 
 //------------------------------------------
 
+console.log("dan");
+
 monthSales2 = [
-  {"month":10, "sales":100},
+  {"month":10, "sales":50},
   {"month":20, "sales":130},
-  {"month":30, "sales":250},
-  {"month":40, "sales":300},
-  {"month":50, "sales":265},
-  {"month":60, "sales":225},
+  {"month":30, "sales":150},
+  {"month":40, "sales":190},
+  {"month":50, "sales":165},
+  {"month":60, "sales":115},
   {"month":70, "sales":180},
-  {"month":80, "sales":120},
-  {"month":90, "sales":145},
-  {"month":100, "sales":130},
+  {"month":80, "sales":60},
+  {"month":90, "sales":75},
+  {"month":100, "sales":80},
 ];
 
 let lineFun2 = d3.svg.line()
                 .x(function(d) {return d.month*2;})
                 .y(function(d) {return h - d.sales;})
-                .interpolate("linear");
+                // .interpolate("linear");
+                .interpolate("basis");
+
 
 let svg2 = d3.select("body")
             .append("svg")
             .attr({width:w, height:h})
-            .attr("style", "outline: thin solid blue;"); //adding red outline
-            ;
+            .attr("style", "outline: thin solid green;"); //adding outline
+
 
 let viz2 = svg2.append("path")
             .attr({
               d: lineFun2(monthSales2),
-              "stroke": "purple",
+              "stroke": "#ff0033",
               "stroke-width": 2,
               "fill": "none"
             })
@@ -76,6 +80,16 @@ let labels = svg2.selectAll("text")
               .append("text")
               .text(function(d){return d.sales;})
               .attr({
-                x: function(d) { return d.month + 25;},
-                y: function(d) {return h-d.sales;}
+                x: function(d) { return d.month*2 - 15;},
+                y: function(d) {return h-d.sales;},
+                "font-size": "12px",
+                "font-family": "sans-serif",
+                "fill": "#666666",
+                "text-anchor": "start",
+                "dy": ".35em",
+                "font-weight": function(d, i){
+                  if (i === 0 || i == (monthSales2.length - 1)){
+                    return "bold"; }
+                  return "normal";
+                  }
               })
