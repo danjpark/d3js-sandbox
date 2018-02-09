@@ -1,13 +1,14 @@
-d3.select("body")
-  .append("h1")
-  .text("hello world!");
+
+d3.select('body')
+  .append('h1')
+  .text('hello world!');
 
 const h = 100;
 const w = 400;
 // let dataset;
 
-d3.csv("./MonthlySales.csv", function(error, data){
-  if(error){
+d3.csv("./MonthlySales.csv", (error, data) => {
+  if (error) {
     console.log(error);
   } else {
     console.log(data);
